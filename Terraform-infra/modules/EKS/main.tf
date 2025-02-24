@@ -25,6 +25,9 @@ resource "aws_eks_cluster" "eks_cluster" {
   vpc_config {
     subnet_ids = var.subnet_id
   }
+  tags = {
+    "alpha.eksctl.io/cluster-oidc-enabled" = "true"
+  }
   depends_on = [aws_iam_role_policy_attachment.eks_cluster_policy_attachment]
 } 
 
