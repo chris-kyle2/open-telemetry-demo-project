@@ -5,10 +5,17 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:010526264934:certificate/dbd4ca13-e4de-4e81-b938-593f0b8cbeb6
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
 spec:
   ingressClassName: alb
+  tls:
+    - hosts:
+        - opentel.bytevoyage.click
+      secretName: tls-secret
   rules:
-    - host: k8s-default-frontend-e615cc52cb-1002807887.us-east-1.elb.amazonaws.com
+    - host: opentel.bytevoyage.click
       http:
         paths:
           - path: "/"
