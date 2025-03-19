@@ -45,6 +45,10 @@ variable "priv_subnet_name" {
   description = "The name of the private subnet"
   type        = list(string)
 }
+variable "cluster_name" {
+  description = "The name of the EKS cluster"
+  type        = string
+}
 
 ##### BastionSecurity Variables Configuration #####
 variable "bastion_sg_name" {

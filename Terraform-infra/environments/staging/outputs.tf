@@ -42,6 +42,11 @@ output "dynamodb_table_arn" {
   value       = module.dynamodb.table_arn
 }
 
+output "eks_security_group_id" {
+  description = "The ID of the EKS security group"
+  value       = module.eks_security.security_group_id
+}
+
 
 
 

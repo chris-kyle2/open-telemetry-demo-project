@@ -43,4 +43,8 @@ variable "priv_subnet_az" {
   description = "The availability zone for the private subnet"
   type        = list(string)  
 }
+variable "cluster_name" {
+  description = "The name of the EKS cluster"
+  type        = string
+}
 

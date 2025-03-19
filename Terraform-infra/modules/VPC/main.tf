@@ -5,6 +5,7 @@ resource "aws_vpc" "open-tel-vpc" {
   
   tags = {
     Name = var.vpc_name
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
   }
 }
 resource "aws_subnet" "open-tel-pub-subnet" {
@@ -16,7 +17,7 @@ resource "aws_subnet" "open-tel-pub-subnet" {
   tags = {
     Name = var.pub_subnet_name[count.index]
     "kubernetes.io/role/elb"        = "1"
-    "kubernetes.io/cluster/staging-eks-cluster"   = "owned"
+    "kubernetes.io/cluster/${var.cluster_name}"   = "shared"
   }
 }
 resource "aws_subnet" "open-tel-priv-subnet" {
@@ -28,7 +29,7 @@ resource "aws_subnet" "open-tel-priv-subnet" {
   tags = {
     Name = var.priv_subnet_name[count.index]
     "kubernetes.io/role/internal-elb"    = "1" 
-    "kubernetes.io/cluster/staging-eks-cluster"   = "owned"
+    "kubernetes.io/cluster/${var.cluster_name}"   = "shared"
   }
 }
 resource "aws_internet_gateway" "open-tel-igw" {
@@ -42,6 +43,9 @@ resource "aws_route_table" "open-tel-pub-rt" {
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.open-tel-igw.id
+  }
+  tags ={
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
   }
 }
 resource "aws_route_table_association" "open-tel-pub-rt-assoc" {

@@ -12,6 +12,7 @@ module "vpc" {
   igw_name = var.igw_name
   pub_subnet_name = var.pub_subnet_name
   priv_subnet_name = var.priv_subnet_name
+  cluster_name = var.cluster_name
 }
 
 module "bastion_security" {
@@ -54,6 +55,7 @@ module "eks" {
   subnet_id = module.vpc.private_subnet_ids
   node_groups = var.eks_node_groups
   depends_on = [module.vpc]
+  security_group_id = module.eks_security.security_group_id
 }
 
 module "s3" {

@@ -1,6 +1,6 @@
-# CI for Product Catalog Service
+# Continuous Integration for Product Catalog Service
 
-name: product-catalog-ci
+name: product-catalog-continuous-integration
 
 on: 
   push:
@@ -94,7 +94,7 @@ jobs:
         
         - name: Commit and push changes
           run: |
-            git config --global user.email ""
+            git config --global user.email "adarshpandeyiitism@gmail.com"
             git config --global user.name "chris-kyle2"
             git add kubernetes/productcatalog/deploy.yaml
             git commit -m "[CI]: Update product catalog image tag"
