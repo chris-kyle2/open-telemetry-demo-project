@@ -5,7 +5,6 @@ resource "aws_vpc" "open-tel-vpc" {
   
   tags = {
     Name = var.vpc_name
-    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
   }
 }
 resource "aws_subnet" "open-tel-pub-subnet" {
@@ -44,14 +43,12 @@ resource "aws_route_table" "open-tel-pub-rt" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.open-tel-igw.id
   }
-  tags ={
-    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
-  }
 }
 resource "aws_route_table_association" "open-tel-pub-rt-assoc" {
   count = length(var.pub_subnet_cidr)
   subnet_id = aws_subnet.open-tel-pub-subnet[count.index].id
   route_table_id = aws_route_table.open-tel-pub-rt.id
+  
 }
 
 // Add NAT Gateway and Elastic IP

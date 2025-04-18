@@ -45,6 +45,7 @@ module "eks_security" {
   ingress_to_port = var.eks_sg_to_port
   ingress_protocol = var.eks_sg_protocol
   ingress_cidr_blocks = var.eks_sg_cidr_blocks
+  
 }
 
 module "eks" {
